@@ -7,4 +7,3 @@ source $ZSH/oh-my-zsh.sh
 
 eval "$(starship init zsh)"
 alias zj='zellij'
-alias cz='chezmoi'
