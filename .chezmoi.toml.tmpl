@@ -1,7 +1,10 @@
 {{- $email := promptStringOnce . "email" "Email address" -}}
+{{- $role := promptStringOnce . "role" "What is the role of this machine? (desktop/server)" -}}
 
 [data]
     email = {{ $email | quote }}
+    role = {{ $role | quote }}
+
 
 
 [diff]

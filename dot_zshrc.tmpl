@@ -1,0 +1,19 @@
+export ZSH="$HOME/.oh-my-zsh"
+
+ZSH_THEME="robbyrussell"
+
+plugins=(git zsh-autosuggestions zsh-syntax-highlighting chezmoi)
+source $ZSH/oh-my-zsh.sh
+
+eval "$(starship init zsh)"
+alias cz='chezmoi'
+
+
+{{- if eq .role "desktop" }}
+# 只有桌面端 (Mac/Ubuntu桌面) 才有的别名
+alias zj='zellij'
+{{- else if eq .role "server" }}
+# 只有服务器端才有的别名
+alias tm='tmux'
+alias ta='tmux attach' # 一键恢复后台任务
+{{- end }}
