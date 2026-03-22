@@ -21,3 +21,33 @@ alias zj='zellij'
 alias tm='tmux'
 alias ta='tmux attach' # 一键恢复后台任务
 {{- end }}
+
+
+# 自动将用户本地 bin 目录加入 PATH
+if [ -d "$HOME/.local/bin" ] ; then
+    PATH="$HOME/.local/bin:$PATH"
+fi
+
+
+# ==========================================
+# Homebrew 跨平台初始化
+# ==========================================
+
+{{- if eq .chezmoi.os "darwin" }}
+  # Mac 环境
+  {{- if eq .chezmoi.arch "arm64" }}
+  # Apple Silicon Mac
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+  {{- else }}
+  # Intel Mac
+  eval "$(/usr/local/bin/brew shellenv)"
+  {{- end }}
+
+{{- else if eq .chezmoi.os "linux" }}
+  # Linux 环境 (适用于 Dell 服务器或 WSL2)
+  if [ -d "/home/linuxbrew/.linuxbrew" ]; then
+      eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+  elif [ -d "$HOME/.linuxbrew" ]; then
+      eval "$("$HOME/.linuxbrew/bin/brew" shellenv)"
+  fi
+{{- end }}
