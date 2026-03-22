@@ -1,0 +1,32 @@
+layout {
+    // 1. 全局模版：保持清爽的顶部状态栏
+    default_tab_template {
+        pane size=1 borderless=true {
+            plugin location="zellij:compact-bar"
+        }
+        children
+    }
+
+    // 2. Flowo 专属标签页 (默认聚焦)
+    tab name="🧬 Flowo" focus=true {
+        pane command="ssh" {
+            // -t 强制分配伪终端，后面紧跟附着到 flowo 会话的命令
+            // 使用 new-session -A -s 可以确保：如果会话存在就直接连入，万一服务器重启了也能自动新建一个同名会话
+            args "225" "-t" "tmux new-session -A -s flowo"
+        }
+    }
+
+    // 3. PubMed ES Search 专属标签页
+    tab name="🔍 PubMed ES" {
+        pane command="ssh" {
+            args "225" "-t" "tmux new-session -A -s pubmed-es-search"
+        }
+    }
+
+    // 4. 备用控制台 (可选)：连上服务器的根目录，不挂载任何 tmux，纯粹为了临时敲点短命令
+    tab name="🖥️ Server Root" {
+        pane command="ssh" {
+            args "225"
+        }
+    }
+}
