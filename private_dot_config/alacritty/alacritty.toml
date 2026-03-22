@@ -16,7 +16,7 @@ opacity = 0.9
 # 开启 macOS 原生背景模糊，质感拉满
 blur = true
 # 启动时是否全屏 (Windowed / Maximized / Fullscreen)
-startup_mode = "Windowed"
+startup_mode = "Maximized"
 
 [font]
 # 顶级字体：JetBrains Mono Nerd Font

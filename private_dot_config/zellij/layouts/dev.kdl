@@ -1,0 +1,45 @@
+layout {
+    // 1. 将悬浮窗塞进模版，这样每个 Tab 都会继承它（保持不变）
+    default_tab_template {
+        pane size=1 borderless=true {
+            plugin location="zellij:compact-bar"
+        }
+        children
+
+        // 监控抽屉就在这里！
+        floating_panes {
+            pane {
+                x "10%"
+                y "10%"
+                width "80%"
+                height "80%"
+                name "📈 System Monitor"
+                command "htop"
+            }
+        }
+    }
+
+    // 2. 修改后的 Dev 标签页：嵌入 OpenCode
+    tab name="🚀 Dev" focus=true {
+        pane split_direction="vertical" {
+            // 左侧：主要写代码的地方（稍微调整到 70% 给 AI 留点阅读空间，你也可以改回 75%）
+            pane size="70%" name="Editor" focus=true
+            
+            // 右侧：切分为上下两块
+            pane split_direction="horizontal" size="30%" {
+                // 右上：普通终端，用来手动执行命令或看短日志
+                pane size="40%" name="Terminal" cwd="."
+                
+                // 右下：OpenCode 专属面板，启动时自动运行
+                pane size="60%" name="🤖 OpenCode AI" cwd="." {
+                    command "opencode"
+                }
+            }
+        }
+    }
+
+    // 3. Git 标签页保持不变
+    tab name="🌳 Git" {
+        pane name="Git Workspace"
+    }
+}
