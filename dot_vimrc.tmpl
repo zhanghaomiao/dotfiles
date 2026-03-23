@@ -1,0 +1,105 @@
+" ==========================================
+" 1. 动态主题与色彩 (Alacritty + Tokyo Night 适配版)
+" ==========================================
+syntax on
+
+" 关键：开启真彩色支持，这会让 Vim 使用 gui 颜色定义而不是模糊的 256 色号
+if (has("termguicolors"))
+  set termguicolors
+endif
+
+{{- $theme := index . "theme" | default "light" -}}
+{{ if eq $theme "light" }}
+    set background=light
+    
+    " --- Tokyo Night Light 专属调优 ---
+    " 注释：使用稍微深一点的灰蓝色，确保在浅色背景下有足够的对比度
+    hi Comment gui=italic guifg=#565f89 ctermfg=242
+    
+    " 当前行：放弃下划线，改用极其隐约的淡紫色背景 (Tokyo Night 风格)
+    " 如果你依然觉得脏，就把 guibg 设为 NONE，只保留 CursorLineNr
+    hi CursorLine guibg=#e1e2e7 guifg=NONE gui=NONE
+    
+    " 当前行号：这是最有效的“定位点”，用深蓝色加粗
+    hi CursorLineNr guifg=#385f71 gui=bold
+    
+    " 行号：普通的行号用淡灰色
+    hi LineNr guifg=#b8b9bf
+{{ else }}
+    set background=dark
+    " 深色模式适配 (Tokyo Night Storm/Night)
+    hi Comment gui=italic guifg=#565f89 ctermfg=242
+    hi CursorLine guibg=#2f334d guifg=NONE
+    hi CursorLineNr guifg=#ff9e64 gui=bold
+{{ end }}
+
+" 确保开启
+set cursorline
+
+" ==========================================
+" 2. 基础与 UI 设置 (极简现代化)
+" ==========================================
+" 开启行号，并使用相对行号 (方便用 5j, 3k 快速上下跳转)
+set number
+set relativenumber
+
+" 高亮当前光标所在行 (在茫茫代码中一眼找到光标)
+set cursorline
+
+" 开启鼠标支持 (极其重要！允许滚轮翻页、点击定位)
+set mouse=a
+set ttyfast
+
+" 状态栏显示
+set showmode
+set showcmd
+set laststatus=2
+
+" ==========================================
+" 3. 缩进与排版
+" ==========================================
+set expandtab
+set tabstop=4
+set shiftwidth=4
+set smartindent
+set autoindent
+
+" ==========================================
+" 4. 搜索与替换优化
+" ==========================================
+set incsearch
+set hlsearch
+set ignorecase
+set smartcase
+
+" ==========================================
+" 5. 快捷键重映射 (Leader 键设为空格)
+" ==========================================
+let mapleader = "\<Space>"
+
+" 一键取消搜索高亮 (空格 + Enter)
+nnoremap <leader><CR> :nohlsearch<CR>
+
+" 极速保存和退出 (空格 + w / 空格 + q)
+nnoremap <leader>w :w<CR>
+nnoremap <leader>q :q<CR>
+
+" 极速替换当前单词 (空格 + s)
+nnoremap <leader>s :%s/\<<C-r><C-w>\>//g<Left><Left>
+
+" 分屏丝滑游走
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+
+" 一键切换粘贴模式 (按 F2 开启/关闭粘贴模式，再也不怕格式乱掉)
+set pastetoggle=<F2>
+
+" ==========================================
+" 6. 行为逻辑优化
+" ==========================================
+set hidden
+set autoread
+set noerrorbells
+set visualbell t_vb=
