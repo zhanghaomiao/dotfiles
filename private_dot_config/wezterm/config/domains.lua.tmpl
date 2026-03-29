@@ -1,0 +1,86 @@
+local platform = require('utils.platform')
+
+local options = {
+   -- ref: https://wezfurlong.org/wezterm/config/lua/SshDomain.html
+   ssh_domains = {
+      {
+         name = 'ssh:225',
+         remote_address = '{{ if eq .network "company" }}172.16.3.225{{ else }}100.121.9.76{{ end }}',
+         multiplexing = 'None',
+         ssh_option = {
+            user = 'zhanghm',
+         },
+      },
+      {
+         name = 'ssh:n1',
+         remote_address = '{{ if eq .network "company" }}172.16.3.222{{ else }}iregene-222{{ end }}',
+         multiplexing = 'None',
+         ssh_option = {
+            user = 'zhanghm',
+         },
+      },
+      {
+         name = 'ssh:n2',
+         remote_address = '{{ if eq .network "company" }}172.16.3.223{{ else }}iregene-223{{ end }}',
+         multiplexing = 'None',
+         ssh_option = {
+            user = 'zhanghm',
+         },
+      },
+      {
+         name = 'ssh:pmx1',
+         remote_address = '192.168.31.186',
+         multiplexing = 'None',
+         ssh_option = {
+            user = 'haomiao',
+            identity_file = '~/.ssh/id_ecdsa',
+         },
+      },
+      {
+         name = 'ssh:pmx2',
+         remote_address = '192.168.31.187',
+         multiplexing = 'None',
+         ssh_option = {
+            user = 'haomiao',
+            identity_file = '~/.ssh/id_ecdsa',
+         },
+      },
+   },
+
+   -- ref: https://wezfurlong.org/wezterm/multiplexing.html#unix-domains
+   unix_domains = {},
+
+   -- ref: https://wezfurlong.org/wezterm/config/lua/WslDomain.html
+   wsl_domains = {},
+}
+
+if platform.is_win then
+   options.ssh_domains = {
+      {
+         name = 'ssh:wsl',
+         remote_address = 'localhost',
+         multiplexing = 'None',
+         default_prog = { 'fish', '-l' },
+         assume_shell = 'Posix',
+      },
+   }
+
+   options.wsl_domains = {
+      {
+         name = 'wsl:ubuntu-fish',
+         distribution = 'Ubuntu',
+         username = 'kevin',
+         default_cwd = '/home/kevin',
+         default_prog = { 'fish', '-l' },
+      },
+      {
+         name = 'wsl:ubuntu-bash',
+         distribution = 'Ubuntu',
+         username = 'kevin',
+         default_cwd = '/home/kevin',
+         default_prog = { 'bash', '-l' },
+      },
+   }
+end
+
+return options
