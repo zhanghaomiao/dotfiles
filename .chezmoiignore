@@ -12,3 +12,5 @@
 {{ if eq .role "desktop" }}
 .tmux.conf
 {{ end }}
+
+.config/yazi/plugins/
