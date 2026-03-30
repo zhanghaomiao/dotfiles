@@ -1,6 +1,7 @@
 local gpu_adapters = require('utils.gpu-adapter')
 local backdrops = require('utils.backdrops')
 local colors = require('colors.custom')
+local light_colors = require('colors.light')
 
 return {
    max_fps = 120,
@@ -22,14 +23,16 @@ return {
    {{- if eq .theme "dark" }}
    color_scheme = 'Tokyo Night',
    window_background_opacity = 0.85,
+   colors = colors,
    {{- else }}
    color_scheme = 'Tokyo Night Day',
    window_background_opacity = 1.0,
+   colors = light_colors,
    {{- end }}
-   colors = colors,
 
    -- background: pass in `true` if you want wezterm to start with focus mode on (no bg images)
-   background = backdrops:initial_options(false),
+   -- background = backdrops:initial_options(false),
+   background = {},
 
    -- scrollbar
    enable_scroll_bar = true,

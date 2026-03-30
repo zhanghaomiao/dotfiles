@@ -5,7 +5,7 @@ local options = {
    ssh_domains = {
       {
          name = 'ssh:225',
-         remote_address = '{{ if eq .network "company" }}172.16.3.225{{ else }}100.121.9.76{{ end }}',
+         remote_address = '{{ if eq .network "company" }}225{{ else }}100.121.9.76{{ end }}',
          multiplexing = 'None',
          ssh_option = {
             user = 'zhanghm',
@@ -13,7 +13,7 @@ local options = {
       },
       {
          name = 'ssh:n1',
-         remote_address = '{{ if eq .network "company" }}172.16.3.222{{ else }}iregene-222{{ end }}',
+         remote_address = '{{ if eq .network "company" }}n1{{ else }}iregene-222{{ end }}',
          multiplexing = 'None',
          ssh_option = {
             user = 'zhanghm',
@@ -21,7 +21,7 @@ local options = {
       },
       {
          name = 'ssh:n2',
-         remote_address = '{{ if eq .network "company" }}172.16.3.223{{ else }}iregene-223{{ end }}',
+         remote_address = '{{ if eq .network "company" }}n2{{ else }}iregene-223{{ end }}',
          multiplexing = 'None',
          ssh_option = {
             user = 'zhanghm',
@@ -53,34 +53,5 @@ local options = {
    -- ref: https://wezfurlong.org/wezterm/config/lua/WslDomain.html
    wsl_domains = {},
 }
-
-if platform.is_win then
-   options.ssh_domains = {
-      {
-         name = 'ssh:wsl',
-         remote_address = 'localhost',
-         multiplexing = 'None',
-         default_prog = { 'fish', '-l' },
-         assume_shell = 'Posix',
-      },
-   }
-
-   options.wsl_domains = {
-      {
-         name = 'wsl:ubuntu-fish',
-         distribution = 'Ubuntu',
-         username = 'kevin',
-         default_cwd = '/home/kevin',
-         default_prog = { 'fish', '-l' },
-      },
-      {
-         name = 'wsl:ubuntu-bash',
-         distribution = 'Ubuntu',
-         username = 'kevin',
-         default_cwd = '/home/kevin',
-         default_prog = { 'bash', '-l' },
-      },
-   }
-end
 
 return options
