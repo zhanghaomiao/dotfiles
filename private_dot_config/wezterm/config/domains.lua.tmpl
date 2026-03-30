@@ -15,18 +15,23 @@ local options = {
          multiplexing = 'None',
          username = 'zhanghm',
       },
+
+       -- 225 使用 WSL 代理连接（libssh 连不上）
       {
-         name = 'ssh:225',
-         remote_address = '{{ if eq .network "company" }}172.16.3.225{{ else }}100.121.9.76{{ end }}',
-         multiplexing = 'None',
-         username = 'zhanghm',
-      },
-      {
-         name = 'ssh:pmx1',
-         remote_address = '192.168.31.186',
-         multiplexing = 'None',
-         username = 'haomiao',
-      },
+          name = 'ssh:225',
+          remote_address = '{{ if eq .network "company" }}172.16.3.225{{ else }}100.121.9.76{{ end }}',
+          multiplexing = 'None',
+          username = 'zhanghm',
+         ssh_option = {
+            identity_file = '~/.ssh/id_ecdsa',
+         },
+       },
+       {
+          name = 'ssh:pmx1',
+          remote_address = '192.168.31.186',
+          multiplexing = 'None',
+          username = 'haomiao',
+       },
       {
          name = 'ssh:pmx2',
          remote_address = '192.168.31.187',
