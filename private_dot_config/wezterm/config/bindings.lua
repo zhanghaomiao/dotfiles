@@ -26,11 +26,6 @@ local keys = {
         action = act.ShowLauncherArgs({ flags = 'FUZZY|WORKSPACES' }),
      },
      -- workspace: rename
-     {
-        key = 'r',
-        mods = mod.SUPER_REV,
-        action = act.EmitEvent('workspace.rename'),
-     },
    { key = 'F11', mods = 'NONE',    action = act.ToggleFullScreen },
    { key = 'F12', mods = 'NONE',    action = act.ShowDebugOverlay },
    { key = 'f',   mods = mod.SUPER, action = act.Search({ CaseInSensitiveString = '' }) },
@@ -224,6 +219,39 @@ local keys = {
          timeout_milliseconds = 1000,
       }),
    },
+
+   {
+      key = 'w',
+      mods = 'LEADER',
+      action = act.ShowLauncherArgs { flags = 'FUZZY|WORKSPACES' },
+    },
+
+    -- 2. ➕ 新建一个空白的 Workspace (直接弹窗让你输入名字)
+    {
+      key = 'n',
+      mods = 'LEADER',
+      action = act.PromptInputLine {
+        description = '输入新 Workspace 名字：',
+        action = wezterm.action_callback(function(window, pane, line)
+          if line then
+            window:mux_window():spawn_tab {}
+            wezterm.mux.rename_workspace(wezterm.mux.get_active_workspace(), line)
+          end
+        end),
+      },
+    },
+
+    -- 3. 🔄 在最近使用的两个 Workspace 之间快速反复横跳
+    {
+      key = 'Tab',
+      mods = 'LEADER',
+      action = act.SwitchWorkspaceRelative(1),
+    },
+    {
+      key = 'r',
+      mods = 'LEADER',
+      action = act.EmitEvent('workspace.rename'),
+    },
 }
 
 -- stylua: ignore
