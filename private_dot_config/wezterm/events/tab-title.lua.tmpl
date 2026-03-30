@@ -90,7 +90,23 @@ local RENDER_VARIANTS = {
    { 'scircle_left', 'wsl', 'title', 'unseen_output', 'padding', 'scircle_right' },
 }
 
+{{- if eq .theme "light" }}
+---@type table<string, Cells.SegmentColors>
+-- stylua: ignore
+local colors = {
+   text_default          = { bg = '#acb0be', fg = '#4c4f69' },
+   text_hover            = { bg = '#bcc0cc', fg = '#4c4f69' },
+   text_active           = { bg = '#1e66f5', fg = '#eff1f5' },
 
+   unseen_output_default = { bg = '#acb0be', fg = '#d20f39' },
+   unseen_output_hover   = { bg = '#bcc0cc', fg = '#d20f39' },
+   unseen_output_active  = { bg = '#1e66f5', fg = '#eff1f5' },
+
+   scircle_default       = { bg = 'rgba(255, 255, 255, 0.6)', fg = '#acb0be' },
+   scircle_hover         = { bg = 'rgba(255, 255, 255, 0.6)', fg = '#bcc0cc' },
+   scircle_active        = { bg = 'rgba(255, 255, 255, 0.6)', fg = '#1e66f5' },
+}
+{{- else }}
 ---@type table<string, Cells.SegmentColors>
 -- stylua: ignore
 local colors = {
@@ -106,6 +122,7 @@ local colors = {
    scircle_hover         = { bg = 'rgba(0, 0, 0, 0.4)', fg = '#5D87A3' },
    scircle_active        = { bg = 'rgba(0, 0, 0, 0.4)', fg = '#74C7EC' },
 }
+{{- end }}
 
 ---
 -- ================
