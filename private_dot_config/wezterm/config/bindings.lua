@@ -247,11 +247,17 @@ local keys = {
       mods = 'LEADER',
       action = act.SwitchWorkspaceRelative(1),
     },
-    {
-      key = 'r',
-      mods = 'LEADER',
-      action = act.EmitEvent('workspace.rename'),
-    },
+     {
+       key = 'r',
+       mods = 'LEADER',
+       action = act.EmitEvent('workspace.rename'),
+     },
+     -- quickselect mode
+     {
+       key = 's',
+       mods = 'LEADER',
+       action = act.QuickSelect,
+     },
 }
 
 -- stylua: ignore

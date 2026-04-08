@@ -1,17 +1,45 @@
 # ==========================================
-# 1. 只要是服务器（不管是 Linux 还是别的），绝不需要 GUI 工具：
+# 1. 跨平台路径隔离 (核心：防止路径污染)
 # ==========================================
-{{ if eq .role "server" }}
-.config/alacritty
-.config/zellij
+
+# 如果不是 macOS，忽略 Library 相关的路径
+{{ if ne .chezmoi.os "darwin" }}
+Library
+private_Library
+{{ end }}
+
+# 如果不是 Windows，忽略 AppData 路径
+{{ if ne .chezmoi.os "windows" }}
+AppData
+{{ end }}
+
+# 如果不是 Linux，忽略 Linux 特有的配置文件
+# (注意：如果你在 Mac 上也用 .config，可以微调这里)
+{{ if ne .chezmoi.os "linux" }}
+.config/Code
 {{ end }}
 
 # ==========================================
-# 2. 只要是桌面端（不管是 Mac 还是 Ubuntu 桌面），不需要 Tmux（因为有 Zellij）：
+# 2. 角色逻辑 (基于服务器 vs 桌面端)
 # ==========================================
+
+# 只要是服务器（比如你的 CentOS），不需要 GUI 工具：
+{{ if eq .role "server" }}
+.config/alacritty
+.config/zellij
+# 服务器通常也不需要 VS Code 的本地配置（如果你只用 SSH 连它的话）
+# .config/Code 
+{{ end }}
+
+# 只要是桌面端（Mac 或 Windows），不需要 Tmux（因为有 Zellij）：
 {{ if eq .role "desktop" }}
 .tmux.conf
 {{ end }}
 
+# ==========================================
+# 3. 全局忽略 (无论什么系统和角色都不管理)
+# ==========================================
 .config/yazi/plugins/
 .config/wezterm/backdrops/
+.DS_Store
+thumbs.db
