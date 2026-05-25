@@ -164,7 +164,9 @@ local keys = {
       end)
    },
 
-   -- panes (tmux-style: LEADER = Ctrl+Space) --
+   -- panes (Vim-style: LEADER = Ctrl+Space) --
+   { key = 'v', mods = 'LEADER', action = act.SplitVertical({ domain = 'CurrentPaneDomain' }) },
+   { key = 's', mods = 'LEADER', action = act.SplitHorizontal({ domain = 'CurrentPaneDomain' }) },
    { key = '%', mods = 'LEADER', action = act.SplitVertical({ domain = 'CurrentPaneDomain' }) },
    { key = '5', mods = 'LEADER|SHIFT', action = act.SplitVertical({ domain = 'CurrentPaneDomain' }) },
    { key = '"', mods = 'LEADER', action = act.SplitHorizontal({ domain = 'CurrentPaneDomain' }) },
@@ -245,7 +247,7 @@ local keys = {
      },
      -- quickselect mode
      {
-       key = 's',
+       key = 'q',
        mods = 'LEADER',
        action = act.QuickSelect,
      },
