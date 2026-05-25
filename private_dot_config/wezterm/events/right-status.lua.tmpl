@@ -34,7 +34,7 @@ local charging_icons = {
    nf.md_battery_charging,
 }
 
-{{- if eq .theme "light" }}
+{{- if eq (index . "theme" | default "dark") "light" }}
 ---@type table<string, Cells.SegmentColors>
 -- stylua: ignore
 local colors = {

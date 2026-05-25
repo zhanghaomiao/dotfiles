@@ -31,7 +31,7 @@ set -g repeat-time 0
 # ==========================
 # 动态主题切换 (Chezmoi 接管)
 # ==========================
-{{- if eq .theme "light" }}
+{{- if eq (index . "theme" | default "dark") "light" }}
 # --- Tokyo Night Light ---
 # 1. 整体底色：融入终端背景色，消除边界感
 set -g status-style bg="#e1e2e7",fg="#343b58"

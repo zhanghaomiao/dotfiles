@@ -90,7 +90,7 @@ local RENDER_VARIANTS = {
    { 'scircle_left', 'wsl', 'title', 'unseen_output', 'padding', 'scircle_right' },
 }
 
-{{- if eq .theme "light" }}
+{{- if eq (index . "theme" | default "dark") "light" }}
 ---@type table<string, Cells.SegmentColors>
 -- stylua: ignore
 local colors = {

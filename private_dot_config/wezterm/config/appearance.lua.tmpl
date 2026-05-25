@@ -20,7 +20,7 @@ return {
    cursor_blink_rate = 650,
 
    -- color scheme
-   {{- if eq .theme "dark" }}
+   {{- if eq (index . "theme" | default "dark") "dark" }}
    color_scheme = 'Tokyo Night',
    window_background_opacity = 0.95,
    colors = colors,

@@ -8,7 +8,7 @@ simplified_ui false
 // ==========================================
 // 2. 动态主题与颜色定义 (完全绑定，结构极简)
 // ==========================================
-{{- if eq .theme "light" }}
+{{- if eq (index . "theme" | default "dark") "light" }}
 theme "custom-light"
 themes {
     custom-light {
