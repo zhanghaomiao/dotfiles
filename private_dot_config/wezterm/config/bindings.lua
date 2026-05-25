@@ -164,28 +164,19 @@ local keys = {
       end)
    },
 
-   -- panes --
-   -- panes: split panes
-   {
-      key = [[\]],
-      mods = mod.SUPER,
-      action = act.SplitVertical({ domain = 'CurrentPaneDomain' }),
-   },
-   {
-      key = [[\]],
-      mods = mod.SUPER_REV,
-      action = act.SplitHorizontal({ domain = 'CurrentPaneDomain' }),
-   },
+   -- panes (tmux-style: LEADER = Ctrl+Space) --
+   { key = '%', mods = 'LEADER', action = act.SplitVertical({ domain = 'CurrentPaneDomain' }) },
+   { key = '5', mods = 'LEADER|SHIFT', action = act.SplitVertical({ domain = 'CurrentPaneDomain' }) },
+   { key = '"', mods = 'LEADER', action = act.SplitHorizontal({ domain = 'CurrentPaneDomain' }) },
+   { key = [[']], mods = 'LEADER|SHIFT', action = act.SplitHorizontal({ domain = 'CurrentPaneDomain' }) },
+   { key = 'h', mods = 'LEADER', action = act.ActivatePaneDirection('Left') },
+   { key = 'j', mods = 'LEADER', action = act.ActivatePaneDirection('Down') },
+   { key = 'k', mods = 'LEADER', action = act.ActivatePaneDirection('Up') },
+   { key = 'l', mods = 'LEADER', action = act.ActivatePaneDirection('Right') },
+   { key = 'x', mods = 'LEADER', action = act.CloseCurrentPane({ confirm = false }) },
 
-   -- panes: zoom+close pane
-   { key = 'Enter', mods = mod.SUPER,     action = act.TogglePaneZoomState },
-   { key = 'w',     mods = mod.SUPER,     action = act.CloseCurrentPane({ confirm = false }) },
-
-   -- panes: navigation
-   { key = 'k',     mods = mod.SUPER_REV, action = act.ActivatePaneDirection('Up') },
-   { key = 'j',     mods = mod.SUPER_REV, action = act.ActivatePaneDirection('Down') },
-   { key = 'h',     mods = mod.SUPER_REV, action = act.ActivatePaneDirection('Left') },
-   { key = 'l',     mods = mod.SUPER_REV, action = act.ActivatePaneDirection('Right') },
+   -- panes: zoom
+   { key = 'Enter', mods = mod.SUPER, action = act.TogglePaneZoomState },
    {
       key = 'p',
       mods = mod.SUPER_REV,

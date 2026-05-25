@@ -20,24 +20,7 @@ AppData
 {{ end }}
 
 # ==========================================
-# 2. 角色逻辑 (基于服务器 vs 桌面端)
-# ==========================================
-
-# 只要是服务器（比如你的 CentOS），不需要 GUI 工具：
-{{ if eq .role "server" }}
-.config/alacritty
-.config/zellij
-# 服务器通常也不需要 VS Code 的本地配置（如果你只用 SSH 连它的话）
-# .config/Code 
-{{ end }}
-
-# 只要是桌面端（Mac 或 Windows），不需要 Tmux（因为有 Zellij）：
-{{ if eq .role "desktop" }}
-.tmux.conf
-{{ end }}
-
-# ==========================================
-# 3. 全局忽略 (无论什么系统和角色都不管理)
+# 2. 全局忽略 (无论什么系统和角色都不管理)
 # ==========================================
 .config/yazi/plugins/
 .config/wezterm/backdrops/
