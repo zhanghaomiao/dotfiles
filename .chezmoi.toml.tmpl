@@ -1,9 +1,13 @@
 {{- $email := promptStringOnce . "email" "Email address" -}}
 {{- $role := promptStringOnce . "role" "What is the role of this machine? (desktop/server)" -}}
+{{- $theme := promptStringOnce . "theme" "选择主题 (light/dark)" "dark" -}}
+{{- $network := promptStringOnce . "network" "选择主题 (company/tailscale)" "tailscale" -}}
 
 [data]
     email = {{ $email | quote }}
     role = {{ $role | quote }}
+    theme = {{ $theme | quote }}
+    network = {{ $network | quote }}
 
 
 
