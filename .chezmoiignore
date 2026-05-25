@@ -1,4 +1,4 @@
-i# ==========================================
+# ==========================================
 # 1. 只要是服务器（不管是 Linux 还是别的），绝不需要 GUI 工具：
 # ==========================================
 {{ if eq .role "server" }}
@@ -11,4 +11,22 @@ i# ==========================================
 # ==========================================
 {{ if eq .role "desktop" }}
 .tmux.conf
+.local/bin/executable_tmux-smart
+{{ end }}
+
+
+{{ if eq .chezmoi.os "windows" }}
+.config/zellij/
+.config/containers/
+.config/pip/
+.local/
+.tmux.conf
+.vimrc
+.zshrc
+.condarc
+{{ end }}
+
+# 如果是 Linux，忽略 Windows 特有的 AppData (如果你以后添加的话)
+{{ if eq .chezmoi.os "linux" }}
+AppData/
 {{ end }}
