@@ -1,0 +1,16 @@
+# 由 chezmoi 管理，所有机器 chezmoi apply 后同步
+# HostName 用 Tailscale MagicDNS 短名（tailscale status 第一列），不要用 100.x IP
+# IP 会变，MagicDNS 名不变；机器改名时只改这一处，各机 chezmoi update 即可
+
+Host dev
+    HostName dev-225
+    User zhanghm
+
+Host bio1
+    HostName bio-100
+    User zhanghm
+
+Host gpu
+    HostName gpu-226
+    User zhanghm
+

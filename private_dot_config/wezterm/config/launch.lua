@@ -9,7 +9,7 @@ if platform.is_win then
    options.default_prog = { 'wsl.exe', '~' }
    options.launch_menu = {
       { label = 'PowerShell', args = { 'powershell.exe', '-NoLogo' } },
-      { label = 'ssh:225-wsl', args = { 'wsl.exe', 'ssh', 'zhanghm@172.16.3.225' } },
+      { label = 'ssh:225', args = { 'wsl.exe', 'ssh', '225' } },
    }
 elseif platform.is_mac then
    options.default_prog = { 'zsh', '-l' }

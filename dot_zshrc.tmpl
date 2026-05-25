@@ -11,17 +11,6 @@ source $ZSH/oh-my-zsh.sh
 
 alias cz='chezmoi'
 
-
-{{- if eq .role "desktop" }}
-# 只有桌面端 (Mac/Ubuntu桌面) 才有的别名
-alias zj='zellij'
-{{- else if eq .role "server" }}
-# 只有服务器端才有的别名
-alias tm='tmux'
-alias ta='tmux attach' # 一键恢复后台任务
-{{- end }}
-
-
 # 自动将用户本地 bin 目录加入 PATH
 if [ -d "$HOME/.local/bin" ] ; then
     PATH="$HOME/.local/bin:$PATH"
